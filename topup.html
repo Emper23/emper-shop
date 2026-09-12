@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="description" content="เติมเงินเข้า Emper Wallet">
+  <title>เติมเงิน — Emper Shop</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Kanit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="topup.css">
+</head>
+<body>
+  <div class="stars" aria-hidden="true"></div>
+  <div class="glow g1" aria-hidden="true"></div>
+  <div class="glow g2" aria-hidden="true"></div>
+
+  <nav class="topbar">
+    <a class="brand" href="index.html"><span>E</span><b>EMPER <em>SHOP</em></b></a>
+    <div class="navlinks"><a href="index.html">หน้าร้าน</a><a href="profile.html">โปรไฟล์</a><a class="active" href="topup.html">เติมเงิน</a></div>
+    <a class="wallet-pill" href="profile.html"><span>ยอดคงเหลือ</span><b id="navBalance">฿0</b></a>
+  </nav>
+
+  <main class="wrap">
+    <section class="hero-card">
+      <div>
+        <span class="eyebrow">EMPER WALLET</span>
+        <h1>เติมเงินเข้า<br><em>กระเป๋าของคุณ</em></h1>
+        <p>กรอกจำนวนเงินที่ต้องการเติมเข้า Emper Wallet แล้วนำยอดคงเหลือไปใช้ซื้อไอดีเกมใน Checkout ได้ทันที</p>
+      </div>
+      <div class="balance-card">
+        <span>ยอดเงินคงเหลือ</span>
+        <strong id="heroBalance">฿0</strong>
+        <small>DEMO WALLET BALANCE</small>
+      </div>
+    </section>
+
+    <div class="grid">
+      <section class="panel topup-panel">
+        <div class="panel-head"><div><span class="eyebrow">ADD BALANCE</span><h2>กรอกจำนวนเงิน</h2></div><span class="secure">● DEMO MODE</span></div>
+
+        <label class="custom-label">จำนวนเงินที่ต้องการเติม
+          <div class="custom-input"><span>฿</span><input id="customAmount" type="number" min="10" max="50000" step="1" inputmode="numeric" placeholder="เช่น 500" autofocus></div>
+          <small>ขั้นต่ำ 10 บาท · สูงสุด 50,000 บาทต่อครั้งในโหมด Demo</small>
+        </label>
+
+        <div class="section-title"><span>02</span><div><b>ช่องทางเติมเงิน</b><small>เลือกช่องทางสำหรับจำลองการเติมเงิน</small></div></div>
+        <div class="methods">
+          <label class="method active">
+            <input type="radio" name="method" value="promptpay" checked>
+            <span class="method-logo"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c5/PromptPay-logo.png" alt="PromptPay"></span>
+            <div><b>PromptPay Demo</b><small>จำลองการชำระผ่านพร้อมเพย์</small></div><i></i>
+          </label>
+          <label class="method">
+            <input type="radio" name="method" value="thaiqr">
+            <span class="method-logo"><img src="https://upload.wikimedia.org/wikipedia/commons/2/28/Thai_QR_Logo.svg" alt="Thai QR Payment"></span>
+            <div><b>Thai QR Payment Demo</b><small>จำลองการชำระผ่านมาตรฐาน Thai QR Payment</small></div><i></i>
+          </label>
+        </div>
+
+        <div class="summary-box">
+          <div><span>ยอดเติมเงิน</span><b id="summaryAmount">฿0</b></div>
+          <div><span>ค่าธรรมเนียม</span><b class="green">ฟรี</b></div>
+          <div class="total"><span>ยอดที่จะเข้ากระเป๋า</span><strong id="summaryTotal">฿0</strong></div>
+        </div>
+
+        <p class="demo-note">หน้านี้เป็นระบบ Demo ยอดเงินจะถูกเก็บใน Local Storage ของเบราว์เซอร์นี้เท่านั้น ไม่มีเงินจริงถูกโอนหรือรับ</p>
+        <div class="error" id="error"></div>
+        <button class="topup-btn" id="topupBtn">เติมเงินเข้า Wallet <span>→</span></button>
+      </section>
+
+      <aside class="side-column">
+        <section class="panel wallet-info">
+          <span class="eyebrow">WALLET OVERVIEW</span><h2>กระเป๋าของคุณ</h2>
+          <div class="wallet-big"><span>พร้อมใช้งาน</span><strong id="sideBalance">฿0</strong></div>
+          <div class="wallet-row"><span>เติมเงินทั้งหมด</span><b id="totalTopup">฿0</b></div>
+          <div class="wallet-row"><span>ใช้จ่ายทั้งหมด</span><b id="totalSpent">฿0</b></div>
+          <a href="profile.html">ดูรายละเอียดในโปรไฟล์ →</a>
+        </section>
+
+        <section class="panel history-panel">
+          <div class="panel-head"><div><span class="eyebrow">RECENT WALLET ACTIVITY</span><h2>รายการล่าสุด</h2></div></div>
+          <div id="history"></div>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+  <div class="success" id="success"><div class="success-card"><span>✓</span><small>TOP UP COMPLETED</small><h2>เติมเงินเข้า Wallet แล้ว</h2><p id="successText">ยอดเงินพร้อมใช้งาน</p><div class="success-actions"><a href="profile.html">ดู Wallet</a><a class="primary" href="index.html#products">เลือกซื้อสินค้า</a></div></div></div>
+
+<script>
+(()=>{
+  const $=(s,c=document)=>c.querySelector(s), $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
+  const BALANCE_KEY='emper_wallet_balance';
+  const TX_KEY='emper_wallet_transactions';
+  const money=n=>'฿'+Number(n||0).toLocaleString('th-TH');
+  let selected=0;
+
+  function balance(){return Number(localStorage.getItem(BALANCE_KEY)||0)}
+  function txs(){return JSON.parse(localStorage.getItem(TX_KEY)||'[]')}
+  function saveTx(list){localStorage.setItem(TX_KEY,JSON.stringify(list))}
+
+  function render(){
+    const bal=balance(), list=txs();
+    $('#navBalance').textContent=$('#heroBalance').textContent=$('#sideBalance').textContent=money(bal);
+    const topups=list.filter(x=>x.type==='topup').reduce((s,x)=>s+Number(x.amount||0),0);
+    const spent=list.filter(x=>x.type==='purchase').reduce((s,x)=>s+Math.abs(Number(x.amount||0)),0);
+    $('#totalTopup').textContent=money(topups);$('#totalSpent').textContent=money(spent);
+    const recent=list.slice().reverse().slice(0,5);
+    $('#history').innerHTML=recent.length?recent.map(x=>`<div class="history"><span class="history-icon ${x.type==='topup'?'plus':'minus'}">${x.type==='topup'?'+':'−'}</span><div><b>${x.type==='topup'?'เติมเงินเข้า Wallet':'ซื้อสินค้า'}</b><small>${x.txId||'DEMO'} · ${x.date||''}</small></div><strong class="${x.type==='topup'?'green':'red'}">${x.type==='topup'?'+':'−'}${money(Math.abs(x.amount))}</strong></div>`).join(''):'<div class="empty"><b>ยังไม่มีรายการ Wallet</b><span>เมื่อเติมเงิน รายการจะมาแสดงตรงนี้</span></div>';
+  }
+
+  function setAmount(value){
+    selected=Math.max(0,Number(value||0));
+    $('#summaryAmount').textContent=$('#summaryTotal').textContent=money(selected);
+  }
+
+  $('#customAmount').addEventListener('input',e=>{setAmount(e.target.value);$('#error').textContent='';});
+  $$('.method').forEach(el=>el.addEventListener('click',()=>{$$('.method').forEach(x=>x.classList.remove('active'));el.classList.add('active')}));
+
+  $('#topupBtn').addEventListener('click',()=>{
+    if(selected<10){$('#error').textContent='กรุณากรอกจำนวนเงินอย่างน้อย 10 บาท';$('#customAmount').focus();return}
+    if(selected>50000){$('#error').textContent='โหมด Demo จำกัดยอดเติมเงินไม่เกิน 50,000 บาทต่อครั้ง';$('#customAmount').focus();return}
+    $('#error').textContent='';
+    const next=balance()+selected;
+    localStorage.setItem(BALANCE_KEY,String(next));
+    const method=$('input[name="method"]:checked').value;
+    const list=txs();
+    list.push({txId:'TOP-'+Date.now().toString().slice(-8),type:'topup',amount:selected,method,date:new Date().toLocaleString('th-TH'),status:'completed'});
+    saveTx(list);
+    render();
+    $('#successText').textContent='เติม '+money(selected)+' สำเร็จ · ยอดคงเหลือ '+money(next);
+    $('#success').classList.add('show');
+  });
+
+  render();setAmount(0);
+})();
+</script>
+</body>
+</html>
