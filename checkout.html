@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Checkout — Emper Shop</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Kanit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="checkout.css"><link rel="stylesheet" href="checkout-extra.css">
+</head>
+<body>
+  <div class="stars"></div><div class="glow g1"></div><div class="glow g2"></div>
+  <nav class="topbar"><a class="brand" href="index.html"><span>E</span><b>EMPER <em>SHOP</em></b></a><div class="steps"><span class="done">1 เลือกสินค้า</span><i></i><span class="active">2 ชำระเงิน</span><i></i><span>3 สำเร็จ</span></div><a class="profile-link" href="profile.html">โปรไฟล์</a></nav>
+
+  <main class="wrap">
+    <a class="back" id="backProduct" href="index.html#products">← กลับไปหน้าสินค้า</a>
+    <div class="checkout-grid">
+      <section class="panel form-panel">
+        <div class="heading"><span>SECURE CHECKOUT</span><h1>ยืนยันคำสั่งซื้อ</h1><p>รูป ราคา และสต็อกหน้านี้อ่านค่าล่าสุดจาก Admin ก่อนชำระทุกครั้ง</p></div>
+        <div class="wallet-strip"><div><span>ยอด Wallet ปัจจุบัน</span><strong id="walletBalance">฿0</strong></div><a href="topup.html">เติมเงินเพิ่ม →</a></div>
+        <div class="section"><div class="section-title"><b>1</b><div><h2>ข้อมูลผู้ซื้อ</h2><p>ใช้สำหรับแสดงในคำสั่งซื้อ Demo</p></div></div><div class="fields"><label>ชื่อผู้ใช้<input id="buyerName" type="text" placeholder="ชื่อผู้ใช้"></label><label>อีเมล<input id="buyerEmail" type="email" placeholder="name@example.com"></label></div></div>
+        <div class="section"><div class="section-title"><b>2</b><div><h2>ช่องทางชำระเงิน</h2><p>ชำระด้วยยอดคงเหลือใน Emper Wallet</p></div></div><div class="payments"><label class="payment active"><input type="radio" name="payment" value="wallet" checked><span class="pay-icon">W</span><div><b>Emper Wallet</b><small id="walletPayText">ยอดคงเหลือ ฿0</small></div><i></i></label></div></div>
+        <label class="terms"><input id="terms" type="checkbox"><span></span><p>ฉันตรวจสอบรายละเอียดสินค้าแล้ว และยืนยันให้หักยอดจาก Emper Wallet สำหรับคำสั่งซื้อ Demo นี้</p></label>
+        <div class="error" id="error"></div>
+        <button class="pay-btn" id="payBtn">ชำระด้วย Emper Wallet <span>→</span></button>
+      </section>
+
+      <aside class="summary-column"><section class="panel product-card"><span class="mini">ORDER SUMMARY</span><div class="art" id="art"><img class="checkout-product-image" id="checkoutImage" alt=""><b id="icon">E</b><span id="game">GAME</span></div><small id="tier">ACCOUNT</small><h2 id="name">กำลังโหลด...</h2><div class="summary-row"><span>ราคา</span><b id="price">฿0</b></div><div class="summary-row"><span>สต็อกล่าสุด</span><b id="stock">0</b></div><div class="summary-row"><span>ค่าธรรมเนียม</span><b class="green">ฟรี</b></div><div class="divider"></div><div class="total"><span>ยอดชำระทั้งหมด</span><b id="total">฿0</b></div></section><section class="secure-note"><span>✓</span><div><b>เช็กข้อมูลจาก Admin ก่อนตัดยอด</b><p>ถ้าราคาเปลี่ยนหรือสินค้าหมด ระบบจะอัปเดตก่อนสร้างออเดอร์</p></div></section></aside>
+    </div>
+  </main>
+
+  <div class="success" id="success"><div class="success-card"><span class="success-icon">✓</span><small>ORDER COMPLETED</small><h2>ชำระด้วย Wallet สำเร็จ</h2><p id="successText">กำลังพาคุณไปดูประวัติคำสั่งซื้อใน Profile</p></div></div>
+
+<script src="catalog.js"></script>
+<script>
+(()=>{
+  'use strict';
+  const $=s=>document.querySelector(s),money=n=>'฿'+Number(n||0).toLocaleString('th-TH');
+  const id=Number(new URLSearchParams(location.search).get('id')||1),BALANCE_KEY='emper_wallet_balance',TX_KEY='emper_wallet_transactions';
+  const user=JSON.parse(localStorage.getItem('emper_demo_user')||'null')||{name:'Znith',email:'demo@emper.shop'};const balance=()=>Number(localStorage.getItem(BALANCE_KEY)||0);let p=EmperCatalog.getProduct(id);
+  function render(){
+    p=EmperCatalog.getProduct(id);const b=balance();
+    $('#buyerName').value=$('#buyerName').value||user.name||'';$('#buyerEmail').value=$('#buyerEmail').value||user.email||'';$('#backProduct').href='product.html?id='+p.id;$('#art').style.background=p.color;$('#icon').textContent=p.icon;$('#game').textContent=p.game.toUpperCase();$('#tier').textContent=p.tier;$('#name').textContent=p.name;$('#price').textContent=$('#total').textContent=money(p.price);$('#stock').textContent=p.stock+' ไอดี';$('#walletBalance').textContent=money(b);$('#walletPayText').textContent='ยอดคงเหลือ '+money(b);document.title='Checkout: '+p.name+' — Emper Shop';
+    const img=$('#checkoutImage');if(p.image){img.src=p.image;img.alt=p.name;$('#art').classList.add('has-image')}else{img.removeAttribute('src');img.alt='';$('#art').classList.remove('has-image')}
+    const unavailable=p.stock<=0,insufficient=b<p.price;$('#payBtn').disabled=unavailable||insufficient;$('#payBtn').textContent=unavailable?'สินค้าหมดแล้ว':insufficient?'ยอดเงินไม่พอ — เติมเงินก่อน':'ชำระด้วย Emper Wallet →';if(unavailable)$('#error').textContent='สินค้านี้หมดสต็อกแล้ว กรุณากลับไปเลือกสินค้าอื่น';else if(insufficient)$('#error').innerHTML='ยอด Wallet ไม่พอ <a href="topup.html">เติมเงินก่อน</a>';else $('#error').textContent='';
+  }
+  $('#payBtn').addEventListener('click',()=>{const latest=EmperCatalog.getProduct(id),current=balance(),email=$('#buyerEmail').value.trim(),name=$('#buyerName').value.trim();if(latest.stock<=0){$('#error').textContent='สินค้าหมดแล้ว กรุณาเลือกสินค้าอื่น';render();return}if(current<latest.price){$('#error').innerHTML='ยอด Wallet ไม่พอสำหรับราคาล่าสุด '+money(latest.price)+' <a href="topup.html">เติมเงินก่อน</a>';render();return}if(name.length<2){$('#error').textContent='กรุณากรอกชื่อผู้ซื้อ';return}if(!/^\S+@\S+\.\S+$/.test(email)){$('#error').textContent='กรุณากรอกอีเมลให้ถูกต้อง';return}if(!$('#terms').checked){$('#error').textContent='กรุณายืนยันการหักยอดจาก Wallet';return}if(!EmperCatalog.decrementStock(latest.id,1)){ $('#error').textContent='ไม่สามารถตัดสต็อกได้ สินค้าอาจถูกซื้อไปแล้ว';render();return }
+    localStorage.setItem('emper_demo_user',JSON.stringify({name,email}));const next=current-latest.price;localStorage.setItem(BALANCE_KEY,String(next));const orderId='EMP-'+Date.now().toString().slice(-7),orders=JSON.parse(localStorage.getItem('emper_demo_orders')||'[]');orders.push({orderId,productId:latest.id,name:latest.name,game:latest.game,price:latest.price,date:new Date().toLocaleString('th-TH'),status:'completed',payment:'Emper Wallet'});localStorage.setItem('emper_demo_orders',JSON.stringify(orders));const txs=JSON.parse(localStorage.getItem(TX_KEY)||'[]');txs.push({txId:'PAY-'+Date.now().toString().slice(-8),type:'purchase',amount:-latest.price,orderId,productId:latest.id,name:latest.name,date:new Date().toLocaleString('th-TH'),status:'completed'});localStorage.setItem(TX_KEY,JSON.stringify(txs));$('#successText').textContent='หัก '+money(latest.price)+' แล้ว · เหลือ '+money(next)+' · สต็อกคงเหลือ '+(latest.stock-1);$('#success').classList.add('show');setTimeout(()=>location.href='profile.html',1300)});
+  window.addEventListener('storage',e=>{if(e.key===EmperCatalog.STORAGE_KEY||e.key===BALANCE_KEY)render()});render();
+})();
+</script>
+</body></html>
