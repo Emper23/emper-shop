@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><meta name="description" content="รายละเอียดไอดีเกม Emper Shop"><title>รายละเอียดสินค้า — Emper Shop</title>
+  <link rel="icon" href="favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Kanit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="product.css">
+</head>
+<body>
+<div class="stars"></div><div class="glow glow-1"></div><div class="glow glow-2"></div><div class="vignette"></div>
+<nav class="site-nav"><div class="nav-pill"><a class="brand" href="index.html"><span class="brand-mark">E</span><span class="brand-name">EMPER <em>SHOP</em></span></a><div class="nav-links"><a href="index.html">หน้าหลัก</a><a href="index.html#products" class="active">ไอดีเกม</a><a href="profile.html">โปรไฟล์</a></div><div class="nav-actions"><a class="btn btn-ghost" href="profile.html">โปรไฟล์</a><a class="btn btn-white" href="index.html#products">สินค้าอื่น</a></div></div></nav>
+<main class="product-page"><div class="wrap">
+<nav class="breadcrumb"><a href="index.html">หน้าหลัก</a><span>/</span><a href="index.html#products">ไอดีเกม</a><span>/</span><b id="crumbName">รายละเอียด</b></nav>
+<section class="product-layout">
+<div class="visual-column"><div class="product-visual" id="productVisual"><img class="product-main-image" id="productImage" alt=""><span class="visual-grid"></span><span class="stock-pill" id="stockPill"><i></i><span id="stockText">กำลังโหลด...</span></span><div class="game-emblem" id="gameEmblem">E</div><div class="visual-meta"><span id="visualGame">GAME ACCOUNT</span><b id="visualCode">EMPER SELECT</b></div></div><div class="mini-info-grid"><article><span>ขั้นตอนถัดไป</span><b>ยืนยันใน Checkout</b><small>ตรวจยอดและสต็อกก่อนทำรายการ</small></article><article><span>การรับประกัน</span><b id="warrantyMini">7 วัน</b><small>ตามเงื่อนไขสินค้า</small></article><article><span>สถานะ</span><b class="green" id="availabilityText">พร้อมจำหน่าย</b><small>อัปเดตจาก Catalog</small></article></div></div>
+<div class="detail-column"><div class="product-heading"><div class="game-label" id="gameLabel">GAME ACCOUNT</div><h1 id="productName">กำลังโหลดสินค้า...</h1><p id="productSummary">กำลังเตรียมรายละเอียดสินค้า</p></div><div class="price-row"><div><span class="price-label">ราคาขาย</span><div class="price" id="productPrice">฿0 <small>บาท</small></div></div><div class="product-id">PRODUCT ID <b id="productId">#0000</b></div></div>
+<div class="spec-section"><div class="section-title"><span>ACCOUNT DETAILS</span><b>รายละเอียดบัญชี</b></div><div class="spec-grid" id="specGrid"></div></div>
+<div class="highlight-section"><div class="section-title"><span>HIGHLIGHTS</span><b>จุดเด่นของไอดีนี้</b></div><ul class="highlight-list" id="highlightList"></ul></div>
+<div class="notice-box"><span class="notice-icon">!</span><div><b>ข้อมูลสินค้าอัปเดตจาก Catalog กลาง</b><p>รูป คำอธิบาย ราคา และสต็อกจะแสดงค่าล่าสุดที่บันทึกไว้ในระบบจัดการสินค้า</p></div></div>
+<div class="purchase-box"><div class="purchase-meta"><span>ยอดชำระทั้งหมด</span><b id="checkoutPrice">฿0</b></div><button class="buy-main" id="buyBtn" type="button">ไป Checkout <span>→</span></button><a class="back-products" href="index.html#products">← กลับไปเลือกสินค้าอื่น</a></div></div>
+</section>
+<section class="related-section"><div class="section-head"><div><span>YOU MAY ALSO LIKE</span><h2>ไอดีเกมอื่นที่น่าสนใจ</h2></div><a href="index.html#products">ดูทั้งหมด →</a></div><div class="related-grid" id="relatedGrid"></div></section>
+</div></main>
+<footer><div class="wrap footer-row"><div class="footer-brand"><span class="brand-mark">E</span><div><b>EMPER SHOP</b><small>Premium Game Account Marketplace</small></div></div><span>© <span id="year"></span> Emper Shop.</span></div></footer>
+<script src="catalog.js"></script>
+<script>
+(()=>{
+  'use strict';
+  const $=(s,c=document)=>c.querySelector(s),money=n=>'฿'+Number(n||0).toLocaleString('th-TH');
+  const id=Number(new URLSearchParams(location.search).get('id')||1);let p=EmperCatalog.getProduct(id);
+  function render(){
+    p=EmperCatalog.getProduct(id);const products=EmperCatalog.getProducts();document.title=p.name+' — Emper Shop';
+    $('#crumbName').textContent=p.game;$('#productVisual').style.background=p.color;$('#gameEmblem').textContent=p.icon;$('#visualGame').textContent=p.game.toUpperCase();$('#visualCode').textContent='EMPER SELECT / #'+String(p.id).padStart(4,'0');$('#gameLabel').textContent=p.game.toUpperCase()+' ACCOUNT';$('#productName').textContent=p.name;$('#productSummary').textContent=p.summary;$('#productPrice').innerHTML=money(p.price)+' <small>บาท</small>';$('#checkoutPrice').textContent=money(p.price);$('#productId').textContent='#'+String(p.id).padStart(4,'0');$('#stockText').textContent=p.stock>0?'เหลือ '+p.stock+' ไอดี':'สินค้าหมด';$('#stockPill').classList.toggle('out',p.stock<=0);$('#warrantyMini').textContent=p.warranty;$('#availabilityText').textContent=p.stock>0?'พร้อมจำหน่าย':'สินค้าหมด';$('#availabilityText').classList.toggle('green',p.stock>0);
+    const img=$('#productImage');if(p.image){img.src=p.image;img.alt=p.name;img.decoding='async';$('#productVisual').classList.add('has-image')}else{img.removeAttribute('src');img.alt='';$('#productVisual').classList.remove('has-image')}
+    $('#specGrid').innerHTML=[['เกม',p.game],['ระดับ / สถานะ',p.rank],['อีเมล',p.email],['รับประกัน',p.warranty],['สต็อกล่าสุด',p.stock+' ไอดี'],['ราคาปัจจุบัน',money(p.price)]].map(([a,b])=>`<div class="spec-item"><span>${a}</span><b>${b}</b></div>`).join('');
+    $('#highlightList').innerHTML=p.features.map(x=>`<li><i>✓</i><span>${x}</span></li>`).join('');
+    $('#relatedGrid').innerHTML=products.filter(x=>x.id!==p.id).slice(0,3).map(x=>`<a class="related-card" href="product.html?id=${x.id}"><div class="related-art ${x.image?'has-image':''}" style="background:${x.color}">${x.image?`<img class="related-image" src="${x.image}" alt="${x.name}" loading="lazy" decoding="async">`:''}<b>${x.icon}</b><span>${x.game}</span></div><div class="related-body"><small>${x.tier}</small><h3>${x.name}</h3><div><b>${money(x.price)}</b><span>${x.stock>0?'ดูรายละเอียด →':'สินค้าหมด'}</span></div></div></a>`).join('');
+    if(p.stock<=0){$('#buyBtn').disabled=true;$('#buyBtn').textContent='สินค้าหมด';$('#buyBtn').onclick=null}else{$('#buyBtn').disabled=false;$('#buyBtn').innerHTML='ไป Checkout <span>→</span>';$('#buyBtn').onclick=()=>location.href='checkout.html?id='+p.id}
+  }
+  window.addEventListener('storage',e=>{if(e.key===EmperCatalog.STORAGE_KEY)render()});$('#year').textContent=new Date().getFullYear();render();
+})();
+</script>
+</body></html>
