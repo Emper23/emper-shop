@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><meta name="description" content="เข้าสู่ระบบหรือสร้างบัญชี Emper Shop"><title>เข้าสู่ระบบ — Emper Shop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Kanit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="login.css">
+</head>
+<body>
+<div class="stars"></div><div class="glow glow-1"></div><div class="glow glow-2"></div><div class="vignette"></div>
+<a class="back-link" href="index.html"><span>←</span> กลับไปหน้าร้าน</a>
+<main class="auth-shell">
+<section class="showcase">
+<a class="brand" href="index.html"><span class="brand-mark">E</span><span class="brand-name">EMPER <em>SHOP</em></span></a>
+<div class="showcase-copy"><span class="eyebrow">WELCOME BACK</span><h1>YOUR GAME.<br><span>YOUR ACCOUNT.</span></h1><p>เข้าสู่ระบบเพื่อจัดการคำสั่งซื้อ ดูประวัติ และใช้งาน Profile ของ Emper Shop</p></div>
+<div class="feature-list"><div class="feature-item"><span class="feature-icon">01</span><div><b>ประวัติคำสั่งซื้อ</b><small>ออเดอร์จาก Checkout จะอยู่ใน Profile</small></div></div><div class="feature-item"><span class="feature-icon">02</span><div><b>เข้าเว็บได้เร็วขึ้น</b><small>เลือกอนุญาตคุกกี้หลังล็อกอิน</small></div></div><div class="feature-item"><span class="feature-icon">03</span><div><b>บัญชีเดียวจบ</b><small>เตรียมต่อ backend ในขั้นถัดไป</small></div></div></div>
+<div class="security-note"><i></i> Frontend Demo ยังไม่ตรวจรหัสผ่านกับฐานข้อมูลจริง</div>
+</section>
+<section class="auth-panel">
+<div class="mobile-brand"><span class="brand-mark">E</span><span class="brand-name">EMPER <em>SHOP</em></span></div>
+<div class="auth-card">
+<div class="auth-heading"><span class="mini-label">MEMBER AREA</span><h2 id="formTitle">เข้าสู่ระบบ</h2><p id="formSub">กรอกข้อมูลเพื่อเข้าสู่ Profile ของคุณ</p></div>
+<div class="auth-tabs"><button class="tab-btn active" id="loginTab" type="button">เข้าสู่ระบบ</button><button class="tab-btn" id="registerTab" type="button">สร้างบัญชี</button></div>
+<form id="authForm" novalidate>
+<div class="register-only hidden field"><label for="displayName">ชื่อที่ใช้ในร้าน</label><div class="input-wrap"><span class="input-icon">@</span><input id="displayName" type="text" autocomplete="nickname" placeholder="เช่น Znith"></div><small class="field-error" data-error-for="displayName"></small></div>
+<div class="field"><label for="email">อีเมล</label><div class="input-wrap"><span class="input-icon">✉</span><input id="email" type="email" autocomplete="email" placeholder="name@example.com"></div><small class="field-error" data-error-for="email"></small></div>
+<div class="field"><div class="label-row"><label for="password">รหัสผ่าน</label><button class="text-btn login-only" id="forgotBtn" type="button">ลืมรหัสผ่าน?</button></div><div class="input-wrap"><span class="input-icon">⌁</span><input id="password" type="password" autocomplete="current-password" placeholder="อย่างน้อย 8 ตัวอักษร"><button class="password-toggle" id="passwordToggle" type="button">ดู</button></div><small class="field-error" data-error-for="password"></small></div>
+<div class="register-only hidden field"><label for="confirmPassword">ยืนยันรหัสผ่าน</label><div class="input-wrap"><span class="input-icon">✓</span><input id="confirmPassword" type="password" autocomplete="new-password" placeholder="กรอกรหัสผ่านอีกครั้ง"></div><small class="field-error" data-error-for="confirmPassword"></small></div>
+<label class="check-row login-only"><input id="remember" type="checkbox"><span class="fake-check"></span><span>จดจำฉันไว้ในอุปกรณ์นี้</span></label>
+<label class="check-row register-only hidden"><input id="terms" type="checkbox"><span class="fake-check"></span><span>ฉันยอมรับเงื่อนไขการใช้งานของร้าน</span></label><small class="field-error terms-error" data-error-for="terms"></small>
+<button class="submit-btn" type="submit"><span id="submitText">เข้าสู่ระบบ</span><span class="submit-arrow">→</span></button>
+</form>
+<div class="divider"><span>หรือ</span></div><button class="discord-btn" id="discordBtn" type="button"><span class="discord-icon">D</span> ดำเนินการต่อด้วย Discord</button><p class="switch-copy" id="switchCopy">ยังไม่มีบัญชี? <button id="switchBtn" type="button">สร้างบัญชีฟรี</button></p>
+</div><p class="copyright">© <span id="year"></span> Emper Shop · Frontend Demo</p>
+</section></main>
+<div class="toast-wrap" id="toastWrap"></div>
+<aside class="cookie-bar" id="cookieBar" aria-hidden="true"><div class="cookie-inner"><div class="cookie-icon">C</div><div class="cookie-copy"><b>บันทึกคุกกี้สำหรับเข้าเว็บครั้งถัดไปไหม?</b><p>หากยินยอม ร้านจะจำ preference การเข้าใช้งานบนอุปกรณ์นี้ โดยไม่เก็บรหัสผ่านในคุกกี้</p></div><div class="cookie-actions"><button class="cookie-btn cookie-cancel" id="cookieCancel">ยกเลิก</button><button class="cookie-btn cookie-accept" id="cookieAccept">ยินยอม</button></div></div></aside>
+<script>
+(()=>{
+const $=(s,c=document)=>c.querySelector(s),$$=(s,c=document)=>Array.from(c.querySelectorAll(s));let mode='login',pendingProfile=false;const COOKIE='emper_cookie_choice';$('#year').textContent=new Date().getFullYear();
+function toast(t,s){const e=document.createElement('div');e.className='toast';e.innerHTML='<span class="toast-dot"></span><div><b></b><small></small></div>';$('b',e).textContent=t;$('small',e).textContent=s||'';$('#toastWrap').appendChild(e);setTimeout(()=>e.classList.add('hide'),2600);setTimeout(()=>e.remove(),3000)}
+function err(id,msg){const e=$('[data-error-for="'+id+'"]');if(e)e.textContent=msg;const i=$('#'+id);if(i)i.classList.add('invalid')}
+function clear(){$$('.field-error').forEach(e=>e.textContent='');$$('input').forEach(e=>e.classList.remove('invalid'))}
+function setMode(m){mode=m;clear();$('#authForm').reset();const r=m==='register';$('#loginTab').classList.toggle('active',!r);$('#registerTab').classList.toggle('active',r);$$('.register-only').forEach(e=>e.classList.toggle('hidden',!r));$$('.login-only').forEach(e=>e.classList.toggle('hidden',r));$('#formTitle').textContent=r?'สร้างบัญชีใหม่':'เข้าสู่ระบบ';$('#formSub').textContent=r?'สร้างบัญชี Demo ก่อนเชื่อมฐานข้อมูลจริง':'กรอกข้อมูลเพื่อเข้าสู่ Profile ของคุณ';$('#submitText').textContent=r?'สร้างบัญชี':'เข้าสู่ระบบ';$('#switchCopy').firstChild.textContent=r?'มีบัญชีอยู่แล้ว? ':'ยังไม่มีบัญชี? ';$('#switchBtn').textContent=r?'เข้าสู่ระบบ':'สร้างบัญชีฟรี'}
+function valid(){clear();let ok=true;const email=$('#email').value.trim(),pass=$('#password').value;if(mode==='register'&&$('#displayName').value.trim().length<2){err('displayName','กรุณากรอกชื่ออย่างน้อย 2 ตัว');ok=false}if(!/^\S+@\S+\.\S+$/.test(email)){err('email','กรุณากรอกอีเมลให้ถูกต้อง');ok=false}if(pass.length<8){err('password','รหัสผ่านอย่างน้อย 8 ตัวอักษร');ok=false}if(mode==='register'){if($('#confirmPassword').value!==pass){err('confirmPassword','รหัสผ่านไม่ตรงกัน');ok=false}if(!$('#terms').checked){$('[data-error-for="terms"]').textContent='กรุณายอมรับเงื่อนไข';ok=false}}return ok}
+function goProfile(){location.href='profile.html'}function askCookie(){if(localStorage.getItem(COOKIE)){goProfile();return}pendingProfile=true;$('#cookieBar').classList.add('show');$('#cookieBar').setAttribute('aria-hidden','false')}
+$('#authForm').addEventListener('submit',e=>{e.preventDefault();if(!valid())return;const email=$('#email').value.trim();if(mode==='login'){const old=JSON.parse(localStorage.getItem('emper_demo_user')||'null');localStorage.setItem('emper_demo_user',JSON.stringify({name:(old&&old.name)||email.split('@')[0]||'Member',email}));toast('เข้าสู่ระบบ Demo สำเร็จ','กำลังเตรียม Profile');setTimeout(askCookie,350)}else{localStorage.setItem('emper_demo_user',JSON.stringify({name:$('#displayName').value.trim(),email}));toast('สร้างบัญชี Demo สำเร็จ','กลับไปเข้าสู่ระบบเพื่อดำเนินการต่อ');setTimeout(()=>setMode('login'),650)}});
+$('#cookieAccept').onclick=()=>{localStorage.setItem(COOKIE,'accepted');document.cookie='emper_fast_login=1; Max-Age=2592000; Path=/; SameSite=Lax';$('#cookieBar').classList.remove('show');if(pendingProfile)setTimeout(goProfile,180)};$('#cookieCancel').onclick=()=>{localStorage.setItem(COOKIE,'declined');document.cookie='emper_fast_login=; Max-Age=0; Path=/; SameSite=Lax';$('#cookieBar').classList.remove('show');if(pendingProfile)setTimeout(goProfile,180)};
+$('#loginTab').onclick=()=>setMode('login');$('#registerTab').onclick=()=>setMode('register');$('#switchBtn').onclick=()=>setMode(mode==='login'?'register':'login');$('#passwordToggle').onclick=()=>{const p=$('#password');p.type=p.type==='password'?'text':'password';$('#passwordToggle').textContent=p.type==='password'?'ดู':'ซ่อน'};$('#forgotBtn').onclick=()=>toast('ลืมรหัสผ่าน','จะเชื่อมระบบกู้คืนเมื่อมี backend');$('#discordBtn').onclick=()=>toast('Discord Login','OAuth ยังเป็น Demo');
+})();
+</script>
+</body></html>
