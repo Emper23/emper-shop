@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>โปรไฟล์ — Emper Shop</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Kanit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+  <div class="stars" aria-hidden="true"></div><div class="glow g1"></div><div class="glow g2"></div>
+  <nav class="topbar">
+    <a class="brand" href="index.html"><span>E</span><b>EMPER <em>SHOP</em></b></a>
+    <div class="navlinks"><a href="index.html">หน้าร้าน</a><a href="index.html#products">ไอดีเกม</a><a href="topup.html">เติมเงิน</a><a href="profile.html" class="active">โปรไฟล์</a><a href="admin.html">Admin Demo</a></div>
+    <button id="logoutBtn" class="ghost-btn">ออกจากระบบ</button>
+  </nav>
+
+  <main class="wrap">
+    <section class="profile-hero">
+      <div class="avatar" id="avatar">Z</div>
+      <div class="identity"><span class="eyebrow">MEMBER PROFILE</span><h1 id="userName">Znith</h1><p id="userEmail">demo@emper.shop</p><div class="status"><i></i> บัญชี Demo พร้อมใช้งาน</div></div>
+      <div class="hero-actions"><a class="wallet-btn" href="topup.html">เติมเงินเข้า Wallet</a><a class="primary-btn" href="index.html#products">เลือกซื้อไอดี <span>→</span></a></div>
+    </section>
+
+    <section class="stats">
+      <article class="wallet-stat"><span>ยอดเงินคงเหลือ</span><strong id="walletBalance">฿0</strong><small>ใช้ซื้อสินค้าใน Checkout</small></article>
+      <article><span>คำสั่งซื้อ</span><strong id="orderCount">0</strong><small>รายการทั้งหมดในเบราว์เซอร์นี้</small></article>
+      <article><span>ยอดสั่งซื้อรวม</span><strong id="orderTotal">฿0</strong><small>หักจาก Wallet แล้ว</small></article>
+      <article><span>เติมเงินทั้งหมด</span><strong id="topupTotal">฿0</strong><small>ประวัติ Emper Wallet</small></article>
+    </section>
+
+    <div class="content-grid">
+      <section class="panel orders-panel">
+        <div class="panel-head"><div><span class="eyebrow">ORDER HISTORY</span><h2>ประวัติคำสั่งซื้อ</h2></div><a href="index.html#products">ซื้อเพิ่ม →</a></div>
+        <div class="orders" id="orders"></div>
+      </section>
+
+      <aside class="side-column">
+        <section class="panel wallet-panel">
+          <div class="panel-head"><div><span class="eyebrow">WALLET ACTIVITY</span><h2>รายการเงินล่าสุด</h2></div><a href="topup.html">เติมเงิน →</a></div>
+          <div id="walletHistory"></div>
+        </section>
+
+        <section class="panel quick-panel">
+          <span class="eyebrow">QUICK ACTIONS</span><h2>เมนูลัด</h2>
+          <a href="topup.html"><b>เติมเงินเข้า Wallet</b><small>เพิ่มยอดคงเหลือสำหรับซื้อสินค้า</small><span>→</span></a>
+          <a href="index.html#products"><b>เลือกซื้อไอดีเกม</b><small>ดูสินค้าทั้งหมดในร้าน</small><span>→</span></a>
+          <a href="admin.html"><b>Admin Demo</b><small>จัดการสินค้าและออเดอร์</small><span>→</span></a>
+        </section>
+
+        <section class="panel account-panel">
+          <span class="eyebrow">ACCOUNT</span><h2>ข้อมูลบัญชี</h2>
+          <div><span>ชื่อ</span><b id="accountName">Znith</b></div><div><span>อีเมล</span><b id="accountEmail">demo@emper.shop</b></div><div><span>Cookie preference</span><b id="cookieState">ยังไม่ได้เลือก</b></div>
+          <p>Wallet และประวัติรายการหน้านี้ยังเป็น Frontend Demo เก็บใน Local Storage ของเบราว์เซอร์นี้เท่านั้น</p>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+<script>
+(()=>{
+  const $=s=>document.querySelector(s);
+  const user=JSON.parse(localStorage.getItem('emper_demo_user')||'null')||{name:'Znith',email:'demo@emper.shop'};
+  const orders=JSON.parse(localStorage.getItem('emper_demo_orders')||'[]');
+  const walletTx=JSON.parse(localStorage.getItem('emper_wallet_transactions')||'[]');
+  const balance=Number(localStorage.getItem('emper_wallet_balance')||0);
+  const money=n=>'฿'+Number(n||0).toLocaleString('th-TH');
+
+  $('#userName').textContent=$('#accountName').textContent=user.name||'Member';
+  $('#userEmail').textContent=$('#accountEmail').textContent=user.email||'demo@emper.shop';
+  $('#avatar').textContent=(user.name||'M').trim().charAt(0).toUpperCase();
+  $('#walletBalance').textContent=money(balance);
+  $('#orderCount').textContent=orders.length.toLocaleString('th-TH');
+  $('#orderTotal').textContent=money(orders.reduce((s,o)=>s+Number(o.price||0),0));
+  $('#topupTotal').textContent=money(walletTx.filter(x=>x.type==='topup').reduce((s,x)=>s+Number(x.amount||0),0));
+
+  const choice=localStorage.getItem('emper_cookie_choice');
+  $('#cookieState').textContent=choice==='accepted'?'ยินยอม':choice==='declined'?'ไม่ยินยอม':'ยังไม่ได้เลือก';
+
+  const box=$('#orders');
+  box.innerHTML=orders.length?orders.slice().reverse().map(o=>`<article class="order"><div class="order-icon">${(o.game||'G').slice(0,2).toUpperCase()}</div><div class="order-main"><b>${o.name}</b><small>${o.game||'Game'} · ${o.date||''} · ${o.orderId||'DEMO'}</small></div><div class="order-status"><span>สำเร็จ</span><b>${money(o.price)}</b></div></article>`).join(''):'<div class="empty"><b>ยังไม่มีคำสั่งซื้อ</b><p>เติมเงินเข้า Wallet แล้วเลือกซื้อสินค้าได้เลย</p><a href="topup.html">เติมเงิน</a></div>';
+
+  const wh=$('#walletHistory');
+  const recent=walletTx.slice().reverse().slice(0,6);
+  wh.innerHTML=recent.length?recent.map(x=>`<div class="wallet-history-row"><span class="wallet-history-icon ${x.type==='topup'?'plus':'minus'}">${x.type==='topup'?'+':'−'}</span><div><b>${x.type==='topup'?'เติมเงิน':'ซื้อสินค้า'}</b><small>${x.txId||'DEMO'} · ${x.date||''}</small></div><strong class="${x.type==='topup'?'positive':'negative'}">${x.type==='topup'?'+':'−'}${money(Math.abs(Number(x.amount||0)))}</strong></div>`).join(''):'<div class="wallet-empty">ยังไม่มีรายการ Wallet</div>';
+
+  $('#logoutBtn').addEventListener('click',()=>{localStorage.removeItem('emper_demo_user');location.href='login.html'});
+})();
+</script>
+</body>
+</html>
